@@ -1,0 +1,11 @@
+// vite.config.js
+import { purgeCss } from "file:///E:/fiverr/1xbet/node_modules/vite-plugin-tailwind-purgecss/dist/index.mjs";
+import { sveltekit } from "file:///E:/fiverr/1xbet/node_modules/@sveltejs/kit/src/exports/vite/index.js";
+import { defineConfig } from "file:///E:/fiverr/1xbet/node_modules/vite/dist/node/index.js";
+var vite_config_default = defineConfig({
+  plugins: [sveltekit(), purgeCss()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJFOlxcXFxmaXZlcnJcXFxcMXhiZXRcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfZmlsZW5hbWUgPSBcIkU6XFxcXGZpdmVyclxcXFwxeGJldFxcXFx2aXRlLmNvbmZpZy5qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vRTovZml2ZXJyLzF4YmV0L3ZpdGUuY29uZmlnLmpzXCI7aW1wb3J0IHsgcHVyZ2VDc3MgfSBmcm9tICd2aXRlLXBsdWdpbi10YWlsd2luZC1wdXJnZWNzcyc7XG5pbXBvcnQgeyBzdmVsdGVraXQgfSBmcm9tICdAc3ZlbHRlanMva2l0L3ZpdGUnO1xuaW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSc7XG5cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG5cdHBsdWdpbnM6IFtzdmVsdGVraXQoKSwgcHVyZ2VDc3MoKV1cbn0pO1xuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUFxTyxTQUFTLGdCQUFnQjtBQUM5UCxTQUFTLGlCQUFpQjtBQUMxQixTQUFTLG9CQUFvQjtBQUU3QixJQUFPLHNCQUFRLGFBQWE7QUFBQSxFQUMzQixTQUFTLENBQUMsVUFBVSxHQUFHLFNBQVMsQ0FBQztBQUNsQyxDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=
