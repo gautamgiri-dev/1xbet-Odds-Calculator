@@ -35,3 +35,27 @@ export type BetData = {
 	teamWinsBlocked: string | undefined,
 	htRemoved: boolean | undefined
 }
+
+export type EsportsScan = {
+	regular: TEsportsScan,
+	currentMap: TEsportsScan,
+}
+
+type TEsportsScan = {
+	map: number,
+	mapName: string | undefined,
+	totalBlocked: string | undefined,
+	handicapBlocked: string | undefined,
+	teamWinsBlocked: string | undefined,
+	allBlocked: boolean,
+	droppingOdds: {
+		w1: TDroppingOdds,
+		w2: TDroppingOdds
+	}
+}
+
+type TDroppingOdds = {
+	maxValue: number,
+	currentValue: number,
+	shouldNotify: boolean,
+}

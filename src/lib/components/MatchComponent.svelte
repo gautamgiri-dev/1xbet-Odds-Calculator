@@ -39,6 +39,7 @@
     totalLines: undefined,
     handicapLines: undefined,
     teamWins: undefined,
+    all: undefined,
   };
 
   /**
@@ -53,11 +54,11 @@
    * @param {any | undefined} cb
    */
   function checkBlocked(arr1, arr2, cond, cb = undefined) {
-    const cond1 = (arr1 || []).some(cond);
-    const cond2 = (arr2 || []).some(cond);
+    const cond1 = (arr1 || []).find(cond);
+    const cond2 = (arr2 || []).find(cond);
 
     if (cb) return cb(cond1, cond2);
-    else return cond1 !== cond2;
+    else return !!cond1 !== !!cond2;
   }
 
   async function getCurrentUpdates() {
@@ -68,6 +69,8 @@
 
     const jsonData = await getRequest(url);
     const valueObj = jsonData.Value;
+
+    if (!valueObj) return;
 
     const geObj = valueObj["GE"];
 
@@ -86,9 +89,9 @@
             (/** @type {any} */ c1, /** @type {any} */ c2) =>
               !!c1 != !!c2
                 ? c1
-                  ? "(Home Side Blocked)"
+                  ? "- Over Blocked " + `1(${c1["P"]})`
                   : c2
-                  ? "(Away Side Blocked)"
+                  ? "- Under Blocked " + `2(${c2["P"]})`
                   : undefined
                 : undefined
           );
@@ -125,9 +128,9 @@
             (/** @type {any} */ c1, /** @type {any} */ c2) =>
               !!c1 != !!c2
                 ? c1
-                  ? "(Home Side Blocked)"
+                  ? "- Home Blocked " + `1(${c1["P"]})`
                   : c2
-                  ? "(Away Side Blocked)"
+                  ? "- Away Blocked " + `2(${c2["P"]})`
                   : undefined
                 : undefined
           );
@@ -143,6 +146,14 @@
 
     if (match.sportId != 1) isHTLineRemoved = undefined;
 
+    // Check if all lines are blocked
+    blocked.all = geObj
+      .map((/** @type {{ [x: string]: any[]; }} */ x) =>
+        x["E"].reduce((a, b) => [...a, ...b], [])
+      )
+      .reduce((/** @type {any} */ a, /** @type {any} */ b) => [...a, ...b], [])
+      .every(blockCondition);
+
     checkNotifyCondition();
   }
 
@@ -150,46 +161,40 @@
     let shouldNotify = false;
 
     // Total Single Lines
-    shouldNotify =
-      shouldNotify || ($configurations.notifyTotalLines && totalLines == 1);
+    shouldNotify ||= $configurations.notifyTotalLines && totalLines == 1;
 
     // Handicap Single Lines
-    shouldNotify =
-      shouldNotify ||
-      ($configurations.notifyHandicapLines && handicapLines == 1);
+    shouldNotify ||= $configurations.notifyHandicapLines && handicapLines == 1;
 
     // Half Time Line Removed (Football only)
-    shouldNotify =
-      shouldNotify ||
-      ($configurations.notifyHalfTimeRemoved &&
-        match.sportId == 1 &&
-        !!isHTLineRemoved);
+    shouldNotify ||=
+      $configurations.notifyHalfTimeRemoved &&
+      match.sportId == 1 &&
+      !!isHTLineRemoved;
 
     // Total Single Line one side blocked
-    shouldNotify =
-      shouldNotify ||
-      ($configurations.notifyTotalOneSideBlocked && !!blocked.totalLines);
+    shouldNotify ||=
+      $configurations.notifyTotalOneSideBlocked && !!blocked.totalLines;
 
     // Handicap Single Line one side blocked
-    shouldNotify =
-      shouldNotify ||
-      ($configurations.notifyHandicapOneSideBlocked && !!blocked.handicapLines);
+    shouldNotify ||=
+      $configurations.notifyHandicapOneSideBlocked && !!blocked.handicapLines;
 
     // Team Wins or 1x2 line one side blocked
-    shouldNotify =
-      shouldNotify || ($configurations.notifyTeamWins && !!blocked.teamWins);
+    shouldNotify ||= $configurations.notifyTeamWins && !!blocked.teamWins;
 
     // Match time passed
-    shouldNotify =
-      shouldNotify &&
-      (match.sportId == 1 ? timePassed <= 80 * 60 : timePassed <= 37 * 60);
+    shouldNotify &&=
+      match.sportId == 1 ? timePassed <= 80 * 60 : timePassed <= 37 * 60;
 
     // Match notifications are enabled
-    shouldNotify =
-      shouldNotify &&
-      (match.sportId == 1
+    shouldNotify &&=
+      match.sportId == 1
         ? $configurations.notifyFootball
-        : $configurations.notifyBasketball);
+        : $configurations.notifyBasketball;
+
+    // Check if all lines are not blocked
+    shouldNotify &&= !blocked.all;
 
     if (shouldNotify)
       notifyCallback(

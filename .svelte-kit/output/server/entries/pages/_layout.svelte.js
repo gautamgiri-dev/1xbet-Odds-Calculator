@@ -3,7 +3,6 @@ import { w as writable } from "../../chunks/index.js";
 import { i as initializeToastStore, p as prefersReducedMotionStore, g as getToastStore, a as isApplicationIdle, t as toastSettings } from "../../chunks/config.js";
 import "@tauri-apps/api";
 import "@tauri-apps/api/fs";
-import "@tauri-apps/api/path";
 import "@tauri-apps/api/tauri";
 const app = "";
 const DRAWER_STORE_KEY = "drawerStore";

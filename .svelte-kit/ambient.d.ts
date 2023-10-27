@@ -37,7 +37,7 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_18112: string;
+	export const EFC_20016: string;
 	export const GIT_ASKPASS: string;
 	export const GOPATH: string;
 	export const HOME: string;
@@ -95,7 +95,6 @@ declare module '$env/static/private' {
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TAURI_ARCH: string;
-	export const TAURI_DEBUG: string;
 	export const TAURI_FAMILY: string;
 	export const TAURI_PLATFORM: string;
 	export const TAURI_PLATFORM_TYPE: string;
@@ -155,7 +154,7 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_18112: string;
+		EFC_20016: string;
 		GIT_ASKPASS: string;
 		GOPATH: string;
 		HOME: string;
@@ -213,7 +212,6 @@ declare module '$env/dynamic/private' {
 		SystemDrive: string;
 		SystemRoot: string;
 		TAURI_ARCH: string;
-		TAURI_DEBUG: string;
 		TAURI_FAMILY: string;
 		TAURI_PLATFORM: string;
 		TAURI_PLATFORM_TYPE: string;

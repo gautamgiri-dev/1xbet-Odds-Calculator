@@ -138,14 +138,25 @@ const EXCLUDED_LEAGUES = [
 ];
 const DEFAULT_CONFIGURATIONS = {
   url: "https://1x-bet.in/",
-  botToken: "",
+  botToken: void 0,
   channelId: void 0,
   notifyEnabled: true,
   notifyTotalLines: true,
+  notifyTotalOneSideBlocked: true,
   notifyHandicapLines: true,
+  notifyHandicapOneSideBlocked: true,
   notifyHalfTimeRemoved: true,
   notifyTeamWins: true,
-  excludedLeagues: EXCLUDED_LEAGUES
+  excludedLeagues: EXCLUDED_LEAGUES,
+  notifyFootball: true,
+  notifyBasketball: true,
+  esports: {
+    enabled: true,
+    notifyTotal: true,
+    notifyHandicap: true,
+    notifyTeamWins: true,
+    notifyDroppingOdds: true
+  }
 };
 const configurations = writable(DEFAULT_CONFIGURATIONS);
 const isApplicationIdle = writable(true);

@@ -199,6 +199,66 @@
           </div>
         </div>
       </div>
+
+      <div>
+        <span>Enable notifications for (Esports)</span>
+        <div class="grid grid-cols-2 items-center justify-center">
+          <div class="flex items-center space-x-2 mt-2">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="chkEnabled"
+              bind:value={$configurations.esports.enabled}
+              bind:checked={$configurations.esports.enabled}
+            />
+            <label for="chkEnabled">Send Notifications</label>
+          </div>
+          <div class="flex items-center space-x-2 mt-2">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="chkNotifyEsportsTotal"
+              bind:value={$configurations.esports.notifyTotal}
+              bind:checked={$configurations.esports.notifyTotal}
+            />
+            <label for="chkNotifyEsportsTotal">Total One Side Blocked</label>
+          </div>
+          <div class="flex items-center space-x-2 mt-2">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="chkNotifyEsportsHandicap"
+              bind:value={$configurations.esports.notifyHandicap}
+              bind:checked={$configurations.esports.notifyHandicap}
+            />
+            <label for="chkNotifyEsportsHandicap"
+              >Handicap One Side Blocked</label
+            >
+          </div>
+          <div class="flex items-center space-x-2 mt-2">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="chkNotifyEsportsTeamWins"
+              bind:value={$configurations.esports.notifyTeamWins}
+              bind:checked={$configurations.esports.notifyTeamWins}
+            />
+            <label for="chkNotifyEsportsTeamWins"
+              >Team Wins One Side Blocked</label
+            >
+          </div>
+          <div class="flex items-center space-x-2 mt-2">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="chkNotifyDroppingOdds"
+              bind:value={$configurations.esports.notifyDroppingOdds}
+              bind:checked={$configurations.esports.notifyDroppingOdds}
+            />
+            <label for="chkNotifyDroppingOdds">Dropping Odds</label>
+          </div>
+        </div>
+      </div>
     </form>
     <!-- prettier-ignore -->
     <footer class="modal-footer {parent.regionFooter}">

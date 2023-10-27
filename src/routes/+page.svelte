@@ -15,6 +15,7 @@
     toastSettings,
   } from "$lib/stores/config";
   import { onDestroy, onMount } from "svelte";
+  import EsportMatchComponent from "$lib/components/EsportMatchComponent.svelte";
 
   let isWatching = false;
 
@@ -55,6 +56,10 @@
    * @type {import("../app").LiveMatches[]}
    */
   let basketballMatches = [];
+  /**
+   * @type {import("../app").LiveMatches[]}
+   */
+  let dota2Matches = [];
 
   /**
    * @type {number | undefined}
@@ -64,6 +69,12 @@
   async function loadMatches() {
     footballMatches = await fetchLiveMatches($configurations.url, 1);
     basketballMatches = await fetchLiveMatches($configurations.url, 3);
+    dota2Matches = await fetchLiveMatches(
+      $configurations.url,
+      40,
+      (/** @type {{ league: string; }} */ x) =>
+        x.league.toLowerCase().includes("dota 2")
+    );
   }
 
   async function startWatching() {
@@ -187,6 +198,11 @@
       class={"btn" + (sportsFilter == 3 ? " variant-ghost-secondary" : "")}
       >Basketball</button
     >
+    <button
+      on:click={() => (sportsFilter = 40)}
+      class={"btn" + (sportsFilter == 40 ? " variant-ghost-secondary" : "")}
+      >Esports</button
+    >
   </div>
 {/if}
 
@@ -200,6 +216,12 @@
   {#if (sportsFilter == -1 || sportsFilter == 3) && basketballMatches.length && isWatching}
     {#each basketballMatches as match}
       <MatchComponent domain={$configurations.url} {match} {notifyCallback} />
+    {/each}
+  {/if}
+
+  {#if (sportsFilter == -1 || sportsFilter == 40) && dota2Matches.length && isWatching}
+    {#each dota2Matches as match}
+      <EsportMatchComponent domain={$configurations.url} {match} />
     {/each}
   {/if}
 </div>

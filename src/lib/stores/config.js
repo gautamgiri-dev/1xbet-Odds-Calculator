@@ -34,13 +34,17 @@ const EXCLUDED_LEAGUES = [
   "NBA. H2H GG League",
 ];
 
-const DEV_BOT_TOKEN = "6393283721:AAHysCsxo2GS99hsIfmcylomP-MGo5TIQjc";
-const DEV_CHANNEL_ID = -1001694628284;
+const devMode = false;
+
+const DEV_CONFIG = {
+  BOT_TOKEN: "6393283721:AAHysCsxo2GS99hsIfmcylomP-MGo5TIQjc",
+  CHANNEL_ID: -1001694628284,
+};
 
 export const DEFAULT_CONFIGURATIONS = {
   url: "https://1x-bet.in/",
-  botToken: DEV_BOT_TOKEN,
-  channelId: DEV_CHANNEL_ID,
+  botToken: devMode ? DEV_CONFIG.BOT_TOKEN : undefined,
+  channelId: devMode ? DEV_CONFIG.CHANNEL_ID : undefined,
   notifyEnabled: true,
   notifyTotalLines: true,
   notifyTotalOneSideBlocked: true,
@@ -51,6 +55,13 @@ export const DEFAULT_CONFIGURATIONS = {
   excludedLeagues: EXCLUDED_LEAGUES,
   notifyFootball: true,
   notifyBasketball: true,
+  esports: {
+    enabled: true,
+    notifyTotal: true,
+    notifyHandicap: true,
+    notifyTeamWins: true,
+    notifyDroppingOdds: true,
+  },
 };
 
 export const configurations = writable(DEFAULT_CONFIGURATIONS);
