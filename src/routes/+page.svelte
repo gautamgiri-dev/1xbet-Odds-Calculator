@@ -123,7 +123,7 @@
     Team 1: ${match.team1.name}
     Team 2: ${match.team2.name}
     Total: ${betData.total.lines} line ${betData.total.blocked || ""}
-    Handicap: ${betData.handicap.lines} line ${betData.total.blocked || ""}
+    Handicap: ${betData.handicap.lines} line ${betData.handicap.blocked || ""}
     ${
       match.sportId == 1
         ? `HT Removed: ${betData.htRemoved ? "Yes" : "No"}`

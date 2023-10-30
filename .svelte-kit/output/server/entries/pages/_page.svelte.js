@@ -228,7 +228,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     Team 1: ${match.team1.name}
     Team 2: ${match.team2.name}
     Total: ${betData.total.lines} line ${betData.total.blocked || ""}
-    Handicap: ${betData.handicap.lines} line ${betData.total.blocked || ""}
+    Handicap: ${betData.handicap.lines} line ${betData.handicap.blocked || ""}
     ${match.sportId == 1 ? `HT Removed: ${betData.htRemoved ? "Yes" : "No"}` : ""}
     Teams Wins/1x2 Blocked: ${betData.teamWinsBlocked || "No"}
     Match Time Passed: ${matchTime}
